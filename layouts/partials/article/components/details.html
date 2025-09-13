@@ -25,21 +25,31 @@
 
     {{ $showReadingTime := .Params.readingTime | default (.Site.Params.article.readingTime) }}
     {{ $showDate := not .Date.IsZero }}
-    {{ $showFooter := or $showDate $showReadingTime }}
+    {{ $showLastmod := ne .Lastmod .Date }}
+    {{ $showFooter := or $showDate $showReadingTime $showLastmod }}
     {{ if $showFooter }}
     <footer class="article-time">
         {{ if $showDate }}
             <div>
-                {{ partial "helper/icon" "date" }}
+                {{ partial "helper/icon" "calendar-month" }}
                 <time class="article-time--published">
-                    {{- .Date | time.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") -}}
+                    发布时间: {{ .Date | time.Format "2006-01-02" }}
+                </time>
+            </div>
+        {{ end }}
+
+        {{ if $showLastmod }}
+            <div>
+                {{ partial "helper/icon" "edit" }}
+                <time class="article-time--lastmod">
+                    最后更新: {{ .Lastmod | time.Format "2006-01-02" }}
                 </time>
             </div>
         {{ end }}
 
         {{ if $showReadingTime }}
             <div>
-                {{ partial "helper/icon" "clock" }}
+                {{ partial "helper/icon" "clock-play" }}
                 <time class="article-time--reading">
                     {{ T "article.readingTime" .ReadingTime }}
                 </time>
