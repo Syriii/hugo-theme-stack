@@ -1,20 +1,36 @@
 {{ define "body-class" }}template-archives{{ end }}
 {{ define "main" }}
-    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
-    {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
-    {{ $filtered := ($pages | intersect $notHidden) }}
+{{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
+{{ $filtered := ($pages | intersect $notHidden) }}
 
-    {{ range $filtered.GroupByDate "2006" }}
-    {{ $id := lower (replace .Key " " "-") }}
-    <div class="archives-group" id="{{ $id }}">
-        <h2 class="archives-date section-title"><a href="{{ $.RelPermalink }}#{{ $id }}">{{ .Key }}</a></h2>
-        <div class="article-list--compact archives-list">
-            {{ range .Pages }}
-                {{ partial "article-list/compact" . }}
+
+<article class="archives-container">
+    <h3 class="archives-title">{{- .Title -}}</h3>
+    <div class="archives-list">
+        {{ range $filtered.GroupByDate "2006" }}
+        {{ $id := lower (replace .Key " " "-") }}
+        <div class="year-group" id="{{ $id }}">
+            <!-- <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i>Dubai</div> -->
+            <div class="year-header">
+                <div class="year-title"><a href="{{ $.RelPermalink }}#{{ $id }}">{{ .Key }}</a></div>
+                <!-- <div>2014 - Present</div> -->
+            </div>
+            {{ range .Pages.GroupByDate "January" }}
+            {{ $monthId := printf "%s-%s" $id (lower (replace .Key " " "-")) }}
+            <h5 class="month-header">{{ $monthId }}</h5>
+            <div>
+                <ul class="post-list">
+                    {{ range .Pages }}
+                    <li class="post-item"><i class="fa fa-file-text-o"></i><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
             {{ end }}
         </div>
+        {{ end }}
     </div>
-    {{ end }}
+</article>
 
-    {{ partialCached "footer/footer" . }}
+{{ partialCached "footer/footer" . }}
 {{ end }}

@@ -1,0 +1,195 @@
+/* 归档页面专用样式 - 外部依赖 */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900");
+@import url("https://fonts.googleapis.com/css?family=Cabin:700");
+
+/* 归档页面专用样式 - 仅在 template-archives 页面生效 */
+.template-archives {
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    font-family: "Maven Pro", sans-serif;
+    color: #E0E0E0;
+    background-color: #000000;
+    -webkit-tap-highlight-color: rgba(224, 224, 224, 0.2);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  a {
+    transition: all 0.2s ease-in-out;
+    color: #009688;
+  }
+  a:hover, a:focus {
+    text-decoration: none;
+    color: #00302c;
+  }
+
+  .sectionHeading {
+    margin-bottom: 20px;
+    color: #009688;
+  }
+
+  ::-moz-selection {
+    background: #fcfcfc;
+    background: rgba(224, 224, 224, 0.2);
+    text-shadow: none;
+  }
+
+  ::selection {
+    background: #fcfcfc;
+    background: rgba(224, 224, 224, 0.2);
+    text-shadow: none;
+  }
+
+  img::-moz-selection {
+    background: transparent;
+  }
+
+  img::selection {
+    background: transparent;
+  }
+
+  img::-moz-selection {
+    background: transparent;
+  }
+
+  .shadow-nohover {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* 博客归档时间线样式 */
+  .archives-title {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .archives-list {
+    border-left: 3px solid #009688;
+    padding: 0 30px;
+    margin-left: 185px;
+  }
+  @media (max-width: 767px) {
+    .archives-list {
+      margin-left: 0;
+      padding-right: 0;
+    }
+  }
+  .archives-list .year-group {
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .archives-list .year-group::before {
+    content: "";
+    position: absolute;
+    left: -43px;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #000000;
+    border: 3px solid #009688;
+  }
+  .archives-list .year-group::after {
+    content: "";
+    position: absolute;
+    left: -37px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #009688;
+  }
+  .archives-list .month-header {
+    color: #009688;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .archives-list .year-header {
+    position: absolute;
+    left: -185px;
+    top: 0;
+  }
+  .archives-list .year-header .year-title {
+    color: #009688;
+    font-weight: bold;
+  }
+  .archives-list .post-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  .archives-list .post-item {
+    margin-bottom: 8px;
+    padding-left: 20px;
+  }
+  .archives-list .post-item .fa {
+    margin-right: 8px;
+    color: #009688;
+  }
+  @media (max-width: 767px) {
+    .archives-list .year-header {
+      position: static;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+/* 归档页面专用动画 */
+@-webkit-keyframes animatop {
+  0% {
+    opacity: 0;
+    bottom: -500px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0px;
+  }
+}
+
+@keyframes animatop {
+  0% {
+    opacity: 0;
+    bottom: -500px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0px;
+  }
+}
+
+@-webkit-keyframes rotatemagic {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+    top: -24px;
+    left: -253px;
+  }
+  100% {
+    transform: rotate(-30deg);
+    top: -24px;
+    left: -78px;
+  }
+}
+
+@keyframes rotatemagic {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+    top: -24px;
+    left: -253px;
+  }
+  100% {
+    transform: rotate(-30deg);
+    top: -24px;
+    left: -78px;
+  }
+}
