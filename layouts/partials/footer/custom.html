@@ -1,0 +1,157 @@
+<!-- ========================================================================== 
+     代码块展开收起功能
+     ========================================================================== -->
+{{ $icon := resources.Get "/icons/icon-arrowwhite.png" }}
+{{ if $icon }}
+  {{ $icon = $icon.Resize "22x" }}
+  <script>
+    const arrowIconBase64 = "{{ $icon.Content | base64Encode }}";
+    
+    // 创建按钮模板
+    const createButton = (className, isCollapse = false) => {
+      const template = `
+        <div class="${className}">
+          <span class="${isCollapse ? 'collapse-btn-inner' : 'code-more-btn'}">
+            <img 
+              class="${isCollapse ? 'code-collapse-img' : 'code-more-img'}"
+              src="data:image/png;base64,${arrowIconBase64}"
+              alt="${isCollapse ? '收起' : '展开'}"
+            >
+          </span>
+        </div>
+      `;
+      const div = document.createElement('div');
+      div.innerHTML = template.trim();
+      return div.firstElementChild;
+    };
+
+    // 处理滚动
+    const scrollToBlock = (element, offset = 100) => {
+      const rect = element.getBoundingClientRect();
+      const scrollTop = window.pageYOffset + rect.top - offset;
+      window.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth'
+      });
+    };
+
+    // 初始化代码块展开/收起功能
+    function initCodeMoreBox() {
+      try {
+        const codeBlocks = document.querySelectorAll(".highlight");
+        if (!codeBlocks?.length) {
+          console.log('No code blocks found');
+          return;
+        }
+
+        codeBlocks.forEach(codeBlock => {
+          // 检查是否需要展开/收起功能
+          if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+            return;
+          }
+
+          // 创建按钮
+          const expandBox = createButton('code-more-box');
+          const collapseBox = createButton('code-collapse-btn', true);
+
+          // 展开按钮点击事件
+          expandBox.querySelector('.code-more-btn').addEventListener('click', () => {
+            codeBlock.classList.add('code-show');
+            expandBox.style.display = 'none';
+            window.dispatchEvent(new Event('resize'));
+          });
+
+          // 收起按钮点击事件
+          collapseBox.querySelector('.collapse-btn-inner').addEventListener('click', () => {
+            codeBlock.classList.remove('code-show');
+            expandBox.style.display = 'block';
+            
+            // 使用 requestAnimationFrame 确保DOM更新后再滚动
+            requestAnimationFrame(() => scrollToBlock(codeBlock));
+            window.dispatchEvent(new Event('resize'));
+          });
+
+          // 添加按钮到代码块
+          codeBlock.appendChild(expandBox);
+          codeBlock.appendChild(collapseBox);
+        });
+      } catch (error) {
+        console.error('Error initializing code more box:', error);
+      }
+    }
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', initCodeMoreBox);
+  </script>
+{{ end }}
+
+<!-- ========================================================================== 
+     返回顶部按钮
+     ========================================================================== -->
+<script>
+  // 返回顶部功能
+  const backToTop = () => {
+    document.documentElement.scrollIntoView({
+      behavior: 'smooth'
+    });
+  };
+
+  // 初始化返回顶部按钮
+  function initBackToTopBtn() {
+    try {
+      const backToTopBtn = document.getElementById('back-to-top');
+      if (!backToTopBtn) {
+        console.log('Back to top button not found');
+        return;
+      }
+
+      // 绑定点击事件
+      backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        backToTop();
+      });
+
+      // 滚动显示/隐藏逻辑
+      const toggleButtonVisibility = () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        backToTopBtn.style.display = scrollTop > 200 ? 'inline' : 'none';
+      };
+
+      // 初始状态检查
+      toggleButtonVisibility();
+
+      // 监听滚动事件
+      window.addEventListener('scroll', toggleButtonVisibility);
+    } catch (error) {
+      console.error('Error initializing back to top button:', error);
+    }
+  }
+
+  // 页面加载完成后初始化
+  document.addEventListener('DOMContentLoaded', initBackToTopBtn);
+</script>
+
+<a href="#" id="back-to-top" title="返回顶部"></a>
+
+<!-- ========================================================================== 
+     加载进度条
+     ========================================================================== -->
+<!-- ==========================================================================
+     页面加载进度条
+     ========================================================================== -->
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+  // 配置并启动进度条
+  NProgress.configure({ showSpinner: false });
+  NProgress.start();
+  
+  // 监听页面加载状态
+  document.addEventListener('readystatechange', () => {
+    if (document.readyState === 'interactive') NProgress.inc(0.8);
+    if (document.readyState === 'complete') NProgress.done();
+  });
+</script>
+<!-- ========================================================================== 
+     新功能区域 - 在这里添加新的功能
+     ========================================================================== -->

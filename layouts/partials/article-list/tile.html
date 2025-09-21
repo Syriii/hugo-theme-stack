@@ -34,6 +34,11 @@
             <h2 class="article-title">
                 {{- .context.Title -}}
             </h2>
+            {{ if eq .Type "taxonomy" }}
+            <div class="article-count">
+                {{ .context.Pages | len }} 篇文章
+            </div>
+            {{ end }}
         </div>
     </a>
 </article>

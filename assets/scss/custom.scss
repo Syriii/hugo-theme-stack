@@ -1,1 +1,401 @@
-/* Place your custom SCSS in HUGO_SITE_FOLDER/assets/scss/custom.scss */
+/* ==========================================================================
+   文章时间图标颜色调整
+   ========================================================================== */
+.article-time {
+  svg {
+    color: var(--card-text-color-tertiary) !important;
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   Alert 提示框样式
+   ========================================================================== */
+
+[data-scheme="light"] {
+  .alert-note {
+    --card-separator-color: #4d7eda;
+    --blockquote-background-color: #edf2fa;
+  }
+  
+  .alert-tip {
+    --card-separator-color: #428646;
+    --blockquote-background-color: #edf4ee;
+  }
+  
+  .alert-important {
+    --card-separator-color: #8f6cdd;
+    --blockquote-background-color: #f4f0fa;
+  }
+  
+  .alert-warning {
+    --card-separator-color: #936921;
+    --blockquote-background-color: #f4f1eb;
+  }
+  
+  .alert-caution {
+    --card-separator-color: #be3536;
+    --blockquote-background-color: #faeced;
+  }
+}
+
+[data-scheme="dark"] {
+  .alert-note {
+    --card-separator-color: #4d7eda;
+    --blockquote-background-color: #1a2133;
+  }
+  
+  .alert-tip {
+    --card-separator-color: #428646;
+    --blockquote-background-color: #1a2320;
+  }
+  
+  .alert-important {
+    --card-separator-color: #8f6cdd;
+    --blockquote-background-color: #201a26;
+  }
+  
+  .alert-warning {
+    --card-separator-color: #d4a149;
+    --blockquote-background-color: #262016;
+  }
+  
+  .alert-caution {
+    --card-separator-color: #be3536;
+    --blockquote-background-color: #2d1a1a;
+  }
+}
+.alert {
+  position: relative;
+  
+  .alert-prefix {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--card-separator-color);
+    text-transform: capitalize;
+    line-height: 1;
+    
+    i {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+  }
+
+  &.alert-note .alert-prefix i::before {
+    content: "\f19b";
+  }
+
+  &.alert-tip .alert-prefix i::before {
+    content: "\eea9";
+  }
+
+  &.alert-important .alert-prefix i::before {
+    content: "\ed19";
+  }
+  
+  &.alert-warning .alert-prefix i::before {
+    content: "\ea21";
+  }
+
+  &.alert-caution .alert-prefix i::before {
+    content: "\eca1";
+  }
+}
+
+/* ==========================================================================
+   代码块展开收起功能样式
+   ========================================================================== */
+.highlight {
+  position: relative;
+  max-height: 400px;
+  overflow: hidden;
+
+  &.code-show {
+    max-height: none !important;
+
+    .code-collapse-btn {
+      display: block;
+    }
+  }
+}
+
+.code-more-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  padding-top: 78px;
+
+  [data-scheme="light"] & {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+  }
+
+  [data-scheme="dark"] & {
+    background-image: linear-gradient(to bottom, rgba(29, 31, 33, 0), #1d1f21);
+  }
+}
+
+.code-more-btn,
+.collapse-btn-inner {
+  display: block;
+  margin: auto;
+  width: 44px;
+  height: 22px;
+  cursor: pointer;
+  
+  [data-scheme="light"] & {
+    background: #f0f0f5;
+  }
+
+  [data-scheme="dark"] & {
+    background: #2d2d2d;
+  }
+}
+
+.code-more-btn {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-top: 6px;
+}
+
+.code-more-img,
+.code-collapse-img {
+  display: block;
+  margin: auto;
+  width: 22px;
+  height: 16px;
+  cursor: pointer !important;
+}
+
+.code-collapse-img {
+  transform: rotate(180deg);
+}
+
+.code-collapse-btn {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 0;
+  background: none;
+  z-index: 2;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: -1;
+
+    [data-scheme="light"] & {
+      background-image: linear-gradient(to top, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0));
+    }
+
+    [data-scheme="dark"] & {
+      background-image: linear-gradient(to top, rgba(29, 31, 33, 1) 20%, rgba(29, 31, 33, 0));
+    }
+  }
+}
+
+.collapse-btn-inner {
+  position: relative;
+  border-radius: 8px;
+  padding-bottom: 6px;
+  z-index: 3;
+}
+/* ==========================================================================
+   返回顶部按钮样式
+   ========================================================================== */
+#back-to-top {
+  display: none;
+  position: fixed;
+  bottom: 5px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--body-background);
+  box-shadow: var(--shadow-l2);
+  font-size: 20px;
+  text-align: center;
+  line-height: 38px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-width: 0 0 2px 2px;
+    border-color: var(--back-to-top-color);
+    border-style: solid;
+    transform: rotate(135deg);
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: var(--accent-background);
+
+    &:before {
+      border-color: var(--accent-color);
+    }
+  }
+
+  // 响应式样式
+  @media screen and (max-width: 768px) {
+    bottom: 5px;
+    right: var(--container-padding);
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    line-height: 32px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    bottom: 10px;
+    right: 20px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    bottom: 15px;
+    right: 25px;
+  }
+
+  @media screen and (min-width: 1536px) {
+    bottom: 15px;
+    right: 25px;
+  }
+}
+/* ==========================================================================
+   修改「选中目标」样式
+   ========================================================================== */
+// 设置选中字体的区域背景颜色
+::selection {
+    background: #dae3ea;
+    color: #34495e;
+  }
+  
+  ::-moz-selection {
+    background: #dae3ea;
+    color: #34495e;
+  }
+  
+  ::-webkit-selection {
+    background: #dae3ea;
+    color: #34495e;
+  }
+
+/* ==========================================================================
+   修改「行内代码」样式
+   ========================================================================== */
+:root {
+    // 行内代码背景色
+    --code-background-color: #f8f8f8;
+    // 行内代码前景色
+    --code-text-color: #e96900;
+}
+/* ==========================================================================
+   友链样式
+   ========================================================================== */
+.article-list--links {
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l1);
+    background-color: var(--card-background);
+    --image-size: 50px;
+
+    @include respond(md) {
+        --image-size: 60px;
+    }
+
+    article {
+        & > a {
+            display: flex;
+            align-items: center;
+            padding: var(--small-card-padding);
+            gap: 15px;
+        }
+
+        &:not(:last-of-type) {
+            border-bottom: 1.5px solid var(--card-separator-color);
+        }
+
+        .article-details {
+            flex-grow: 1;
+            padding: 0;
+            min-height: var(--image-size);
+            gap: 10px;
+        }
+
+        .article-title {
+            margin: 0;
+            font-size: 1.6rem;
+
+            @include respond(md) {
+                font-size: 1.8rem;
+            }
+        }
+
+        .article-image {
+            img {
+                width: var(--image-size);
+                height: var(--image-size);
+                object-fit: cover;
+            }
+        }
+
+        .article-time {
+            font-size: 1.4rem;
+        }
+
+        .article-preview {
+            font-size: 1.4rem;
+            color: var(--card-text-color-tertiary);
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        
+        .article-subtitle {
+            margin-top: -5px;
+            font-size: 1.5rem;
+
+            @include respond(md) {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}
+
+/* 友链多栏布局 */
+@media (min-width: 1024px) {
+  .article-list--links {
+    display: grid;
+    // 目前是三列，如需调整列数，修改grid-template-columns
+    grid-template-columns: 1fr 1fr 1fr;
+    background: none;
+    box-shadow: none;
+    gap: 1rem;
+
+    article {
+      background: var(--card-background);
+      border: none;
+      box-shadow: var(--shadow-l2);
+      margin-bottom: 8px;
+      margin-right: 8px;
+      border-radius: 16px;
+    }
+  }
+}

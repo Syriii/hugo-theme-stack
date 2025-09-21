@@ -274,6 +274,19 @@
             }
         }
 
+        .article-count {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        &:not(.has-image) {
+            .article-count {
+                color: var(--card-text-color-tertiary);
+            }
+        }
+
         .article-title {
             font-size: 2rem;
             font-weight: 500;

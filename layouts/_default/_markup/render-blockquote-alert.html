@@ -1,0 +1,7 @@
+<blockquote class="alert alert-{{ .AlertType }}">
+    <div class="alert-prefix"><i class="ri-alert-prefix-icon"></i>{{ .AlertType }}</div>
+    {{ .Text | safeHTML -}}
+</blockquote>
+
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">

@@ -1,0 +1,73 @@
+// 分类页面样式
+.subsection-list {
+    overflow-x: auto;
+
+    // 标签块样式 - 用于显示带数量的小方块标签
+    .article-list--tag-blocks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-bottom: 15px;
+
+        .tag-block {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 80px;
+            padding: 12px 20px;
+            
+            // 外观样式
+            background-color: var(--card-background);
+            border: 1px solid var(--card-separator-color);
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            box-shadow: var(--shadow-l1);
+            
+            // 交互样式
+            text-decoration: none;
+            transition: all 0.3s ease;
+
+            // 彩色边框 - 8种颜色循环
+            &:nth-child(8n+1) { border-left-color: #e74c3c; }
+            &:nth-child(8n+2) { border-left-color: #3498db; }
+            &:nth-child(8n+3) { border-left-color: #2ecc71; }
+            &:nth-child(8n+4) { border-left-color: #f39c12; }
+            &:nth-child(8n+5) { border-left-color: #9b59b6; }
+            &:nth-child(8n+6) { border-left-color: #1abc9c; }
+            &:nth-child(8n+7) { border-left-color: #e67e22; }
+            &:nth-child(8n+8) { border-left-color: #34495e; }
+
+            // 悬停效果
+            &:hover {
+                background-color: var(--accent-color);
+                border-color: var(--accent-color);
+                box-shadow: var(--shadow-l2);
+                transform: translateY(-2px);
+
+                .tag-name {
+                    color: var(--accent-color-text);
+                }
+
+                .tag-count {
+                    color: #666;
+                }
+            }
+
+            // 标签名称样式
+            .tag-name {
+                font-size: 1.6rem;
+                font-weight: 500;
+                color: var(--card-text-color-main);
+                margin-right: 12px;
+            }
+
+            // 标签数量样式
+            .tag-count {
+                font-size: 1.4rem;
+                font-weight: 600;
+                color: #999;
+                line-height: 1.2;
+            }
+        }
+    }
+}

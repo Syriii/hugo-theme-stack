@@ -4,14 +4,14 @@
 {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
 {{ $filtered := ($pages | intersect $notHidden) }}
 <div class="archives-container">
-    <h3 class="archives-title">{{- .Title -}}</h3>
+    <h3 class="archives-title">归档｜Archives</h3>
     <div class="archives-list">
         {{ range $filtered.GroupByDate "2006" }}
         {{ $id := lower (replace .Key " " "-") }}
         <div class="year-group" id="{{ $id }}">
             <!-- <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i>Dubai</div> -->
             <div class="year-header">
-                <div class="year-title"><a href="{{ $.RelPermalink }}#{{ $id }}">{{ .Key }}</a></div>
+                <div class="year-title"><a class="year-title-link" href="{{ $.RelPermalink }}#{{ $id }}">{{ .Key }}</a></div>
                 <!-- <div>2014 - Present</div> -->
             </div>
             {{ range .Pages.GroupByDate "January" }}
