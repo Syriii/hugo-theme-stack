@@ -180,8 +180,8 @@
               content += "<br>";
               var link = post.link;
               var title = post.title;
-              var wordCount = (post.wordCount / 1000).toFixed(1);
-              content += `<a href="${link}" target="_blank">${title} | ${wordCount} 千字</a>`
+            //   var wordCount = (post.wordCount / 1000).toFixed(1);
+              content += `<a href="${link}" target="_blank">${title} | ${post.wordCount} 字</a>`
           }
           return content;
         }
